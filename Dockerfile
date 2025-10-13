@@ -1,24 +1,13 @@
 # Build stage
-FROM node:18-alpine AS builder
+FROM maven:3.8.6-openjdk-11 AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm install --only=production
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Production stage
-FROM node:18-alpine AS runtime
+# Runtime stage
+FROM openjdk:11-jre-slim
 WORKDIR /app
-COPY --from=builder /app/node_modules ./node_modules
-COPY . .
-
-# Create non-root user for security
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-RUN chown -R nextjs:nodejs /app
-USER nextjs
-
-EXPOSE 3000
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
-
-CMD ["npm", "start"]
-
+COPY --from=builder /app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]

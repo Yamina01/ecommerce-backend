@@ -9,7 +9,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.5.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> 
     </parent>
     
     <groupId>com.example</groupId>
@@ -19,7 +19,11 @@
     <name>ECommercesite</name>
     <description>Demo project for Spring Boot</description>
 
+<<<<<<< HEAD
     <!-- Remove empty elements or provide proper values -->
+=======
+   
+>>>>>>> e4974046cc4e98d39d47aa756e50c3954c4e8fd1
     <url>https://github.com/Yamina01/ECommercesite</url>
     
     <properties>
@@ -31,6 +35,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+             <dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <scope>runtime</scope>
+</dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -100,7 +109,11 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+<<<<<<< HEAD
        
+=======
+    
+>>>>>>> e4974046cc4e98d39d47aa756e50c3954c4e8fd1
     </dependencies>
 
     <build>

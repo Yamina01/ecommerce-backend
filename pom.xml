@@ -15,12 +15,12 @@
     <groupId>com.example</groupId>
     <artifactId>ECommercesite</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>ECommercesite</name>
     <description>Demo project for Spring Boot</description>
 
     <!-- Remove empty elements or provide proper values -->
-    <url>https://github.com/yourusername/ECommercesite</url>
+    <url>https://github.com/Yamina01/ECommercesite</url>
     
     <properties>
         <java.version>17</java.version>
@@ -100,11 +100,7 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-        	<groupId>com.example</groupId>
-        	<artifactId>Sendemail</artifactId>
-        	<version>0.0.1-SNAPSHOT</version>
-        </dependency>
+       
     </dependencies>
 
     <build>

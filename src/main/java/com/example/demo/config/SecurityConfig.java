@@ -60,7 +60,11 @@ public class SecurityConfig {
                 .requestMatchers("/api/users/public-test").permitAll()
                 .requestMatchers("/api/products/**").permitAll()
                 .requestMatchers("/images/**").permitAll()
+<<<<<<< HEAD
                 .requestMatchers("/health", "/test" ,"/").permitAll()
+=======
+                .requestMatchers("/health", "/test", "/").permitAll()
+>>>>>>> 071b89bc9a8a1627535dd16fc383a9e8ce6be368
                 
                 // User endpoints
                 .requestMatchers("/api/users/**").authenticated()
@@ -76,7 +80,11 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .authenticationProvider(authenticationProvider())
+<<<<<<< HEAD
             //  CRITICAL FIX: Add JWT filter BEFORE other filters
+=======
+            // CRITICAL FIX: Add JWT filter BEFORE other filters
+>>>>>>> 071b89bc9a8a1627535dd16fc383a9e8ce6be368
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -25,9 +28,12 @@ public class OrderEntity {
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
+    @JsonIgnore
+    
     private Userentity user;
     
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("order")
     private List<OrderItemEntity> items = new ArrayList<>();
     
     public void addItem(OrderItemEntity item) {

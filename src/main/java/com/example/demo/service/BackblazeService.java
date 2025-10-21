@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //package com.example.demo.service;
 //
 //
@@ -122,4 +122,3 @@
 //         }
 //     }
 // }
->>>>>>> c5225cce33b59abfa256f0fa9c674a2ba971cc65

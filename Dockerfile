@@ -9,4 +9,7 @@ COPY --from=builder /app/target/ECommercesite-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72c40e6bde33cbe7cc9a6050092f8d2e6b2280bf

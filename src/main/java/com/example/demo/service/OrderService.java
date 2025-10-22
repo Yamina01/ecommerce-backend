@@ -55,9 +55,14 @@ public class OrderService {
         // Save order
         OrderEntity savedOrder = orderRepo.save(order);
         
-        // Send order confirmation email
-        emailService.sendOrderConfirmation(savedOrder);
-
+        // Send order confirmation email with proper error handling
+        try {
+            emailService.sendOrderConfirmation(savedOrder);
+            System.out.println("✅ Order confirmation email sent successfully");
+        } catch (Exception emailException) {
+            System.err.println("⚠️ Order created but email failed: " + emailException.getMessage());
+            // Don't re-throw the exception - order should still be successful
+        }
 
         // Clear the cart after successful order
         cartService.clearCart(user);
@@ -86,8 +91,14 @@ public class OrderService {
         order.setStatus(status);
         orderRepo.save(order);
         
-        // Send status update email
-        emailService.sendStatusUpdate(order, oldStatus, status);
+        // Send status update email with error handling
+        try {
+            emailService.sendStatusUpdate(order, oldStatus, status);
+            System.out.println("✅ Status update email sent successfully");
+        } catch (Exception emailException) {
+            System.err.println("⚠️ Status updated but email failed: " + emailException.getMessage());
+            // Don't re-throw - status update should still succeed
+        }
     }
 
     // Overloaded method for String status (if needed for backward compatibility)
@@ -99,18 +110,23 @@ public class OrderService {
             throw new RuntimeException("Invalid order status: " + status);
         }
     }
-        // Special method for payment success (can send payment-specific email)
-        public void processPaymentSuccess(Long orderId) {
-            OrderEntity order = orderRepo.findById(orderId)
-                    .orElseThrow(() -> new RuntimeException("Order not found"));
-            
-            OrderStatus oldStatus = order.getStatus();
-            order.setStatus(OrderStatus.PAID);
-            orderRepo.save(order);
-            
-            // Send payment success email
-            emailService.sendPaymentSuccess(order);
+    
+    // Special method for payment success (can send payment-specific email)
+    public void processPaymentSuccess(Long orderId) {
+        OrderEntity order = orderRepo.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
         
+        OrderStatus oldStatus = order.getStatus();
+        order.setStatus(OrderStatus.PAID);
+        orderRepo.save(order);
+        
+        // Send payment success email with error handling
+        try {
+            emailService.sendPaymentSuccess(order);
+            System.out.println("✅ Payment success email sent successfully");
+        } catch (Exception emailException) {
+            System.err.println("⚠️ Payment processed but email failed: " + emailException.getMessage());
+            // Don't re-throw - payment should still succeed
+        }
     }
 }
-
